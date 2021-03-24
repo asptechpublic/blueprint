@@ -1,0 +1,76 @@
+{
+  "properties": {
+    "displayName": "CAF Foundation",
+    "description": "Microsoft Cloud Adoption Framework for Azure – Configure Foundational best practices",
+    "targetScope": "subscription",
+    "parameters": {
+      "Policy_CostCenter_Tag": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Append CostCenter TAG & its value from the Resource Group",
+          "description": "AzureRegion"
+        },
+        "allowedValues": []
+      },
+      "Organization_Name": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Enter your organization name (e.g. Contoso), must be unique",
+          "description": "Organization_Name"
+        },
+        "defaultValue": ""
+      },
+      "KV-AccessPolicy": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Azure AD Group or User 'ObjectID' to grant permissions in Key Vault.(abc123de-f456-ghi7-89jk-l0mno123pqr4)",
+          "description": "KV-AccessPolicy"
+        },
+        "allowedValues": []
+      },
+      "AzureRegion": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Select the Azure Region to deploy the Resources",
+          "description": "AzureRegion",
+          "strongType": "location"
+        },
+        "defaultValue": "eastus"
+      }
+    },
+    "resourceGroups": {
+      "SharedServices-RG": {
+        "name": "[concat(parameters('Organization_Name'),'-SharedSvcs-rg')]",
+        "location": "[parameters('AzureRegion')]",
+        "metadata": {
+          "displayName": "Resource Group for Shared Services"
+        },
+        "dependsOn": []
+      },
+      "Network-RG": {
+        "name": "[concat(parameters('Organization_Name'),'-VNet-rg')]",
+        "location": "[parameters('AzureRegion')]",
+        "metadata": {
+          "displayName": "Resource Group for Networks"
+        },
+        "dependsOn": []
+      },
+      "Identity-RG": {
+        "name": "[concat(parameters('Organization_Name'),'-Identity-rg')]",
+        "location": "[parameters('AzureRegion')]",
+        "metadata": {
+          "displayName": "Resource Group for Identity Services"
+        },
+        "dependsOn": []
+      },
+      "Application-RG": {
+        "name": "[concat(parameters('Organization_Name'),'-VM-rg')]",
+        "location": "[parameters('AzureRegion')]",
+        "metadata": {
+          "displayName": "Resource Group for VMs"
+        },
+        "dependsOn": []
+      }
+    }
+  }
+}
